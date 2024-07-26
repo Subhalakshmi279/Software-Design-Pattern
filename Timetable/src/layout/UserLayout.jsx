@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbar from '@/components/Shared/Navbar'
 
 const UserLayout = () => {
     return (
-        <div>UserLayout</div>
+        <div>
+            <Navbar/>
+        </div>
     )
 }
 

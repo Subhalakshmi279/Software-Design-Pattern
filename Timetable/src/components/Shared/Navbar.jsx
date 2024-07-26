@@ -15,11 +15,15 @@ const Navbar = () => {
     {
       title: "Register",
       path: "/register"
+    },
+    {
+      title: "Logout",
+      path: "/logout"
     }
   ]
   return (
-    <div className="absolute top-0 left-0 w-full h-[8vh] flex flex-row justify-center items-center shadow-sm shadow-primary/50">
-      <div className="w-full h-full text-primary font-bold flex justify-start items-center text-lg ml-5 text-gray-700"> Timetable</div>
+    <div className="fixed top-0 left-0 w-full h-[8vh] flex flex-row justify-center items-center shadow-sm shadow-primary/50 ">
+      <div className="w-full h-full font-bold flex justify-start items-center text-lg ml-5 text-gray-700"> Timetable</div>
       <div className='h-full font-bold flex flex-row justify-end items-center gap-8 mr-5'>
 
         {

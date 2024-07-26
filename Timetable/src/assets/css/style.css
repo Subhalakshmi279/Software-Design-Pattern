@@ -22,9 +22,9 @@
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
+    --border: 0 0% 40%;
     --input: 240 5.9% 90%;
-    --ring: 142.1 76.2% 36.3%;
+    --ring: 0 0% 40%;
     --radius: 0.3rem;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
@@ -64,7 +64,7 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-[hsl(var(--border))];
   }
   body {
     @apply bg-background text-foreground;
@@ -81,4 +81,12 @@
   margin-left: 5%;
   text-align: center;
   margin-bottom: 3%;
+}
+.home-img{
+  position:static;
+  display: flex;
+  height: 600px;
+  width: 700px;
+  margin: 5%;
+  /* background-color: aquamarine; */
 }

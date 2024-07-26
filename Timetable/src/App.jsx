@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Shared/Home'
@@ -10,7 +9,8 @@ import AdminLayout from './layout/AdminLayout'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import NotFound from './pages/Shared/NotFound'
 import HomeLayout from './layout/HomeLayout'
-
+// import Timetable from './pages/Admin/Timetable';
+// import insert from './pages/Admin/insert';
 
 
 
@@ -21,6 +21,7 @@ const App = () => {
                 <Routes>
                     <Route element={<HomeLayout />}>
                         <Route path='/' element={<Home />} />
+                        <Route path='/logout' element={<Home />} />
                         <Route path='/login' element={<Login />} />
                         <Route path='/register' element={<Register />} />
                     </Route>
@@ -32,6 +33,7 @@ const App = () => {
                     <Route element={<AdminLayout />}>
                         <Route path='/admin/dashboard' element={<AdminDashboard />} />
                     </Route>
+                    
 
                     <Route path='*' element={<NotFound />} />
                 </Routes>
