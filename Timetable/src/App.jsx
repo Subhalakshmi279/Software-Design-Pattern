@@ -9,10 +9,11 @@ import AdminLayout from './layout/AdminLayout'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import NotFound from './pages/Shared/NotFound'
 import HomeLayout from './layout/HomeLayout'
-// import Timetable from './pages/Admin/Timetable';
-// import insert from './pages/Admin/insert';
-
-
+import Timetable from './pages/Admin/Timetable';
+import Details from '@/pages/Admin/Details';
+import DetailsSub from './pages/Admin/DetailsSub'
+import DetailsStaff from './pages/Admin/DetailsStaff'
+// import NewAdmin from './pages/Admin/NewAdmin';
 
 const App = () => {
     return (
@@ -31,7 +32,12 @@ const App = () => {
                     </Route>
                     
                     <Route element={<AdminLayout />}>
-                        <Route path='/admin/dashboard' element={<AdminDashboard />} />
+                        {/* <Route path='/admin' element={<NewAdmin/>}/> */}
+                        <Route path='/admin/dashboard' element={<AdminDashboard/>} />
+                        <Route path='/admin/dashboard/details' element={<Details/>}/>
+                        <Route path='/admin/dashboard/timetable' element={<Timetable/>}/>
+                        <Route path='/admin/dashboard/timetable/SubDetails' element={<DetailsSub/>}/>
+                        <Route path='/admin/dashboard/timetable/StaffDetails' element={<DetailsStaff/>}/>
                     </Route>
                     
 

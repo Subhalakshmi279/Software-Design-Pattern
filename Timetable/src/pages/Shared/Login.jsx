@@ -21,7 +21,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (form.email.includes('admin')) {
-      navigate('/admin/dashboard');
+      navigate('/dashboard');
     } else {
       navigate('/dashboard');
     }

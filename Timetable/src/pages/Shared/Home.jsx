@@ -1,32 +1,35 @@
-import React from 'react'
+import React from 'react';
 import imagesvg from '@/assets/images/home-2.svg';
 // import '@/assets/css/Home.css';
+import BoxReveal from '@/components/magicui/box-reveal';
+import About from '@/pages/Shared/About';
+import Footer from './Footer';
 
 const Home = () => {
     return (
         <>
-        <div className='home-img'>
-            <img src={imagesvg} alt="image" />
-        </div>
-
-            {/* animated text */}
-{/*             
-            <div className="relative w-full home">
-      <h3 id="resizing-h3" className="absolute text-left text-[74px] text-[#009393] ml-[15%] font-bold">
-        <span>
-          <div className="stage mx-auto mt-4 h-[100px]">
-            <div className="cubespinner animate-spincube">
-              <div className="face1 text-[#f1c40f]">Innovative</div>
-              <div className="face2 text-white">Creative</div>
-              <div className="face3 text-[#f85555]">Unbeatable</div>
-              <div className="face4 text-white">Exceptional</div>
+            <div className='home-container' style={{ display: 'flex', alignItems: 'center' }}>
+                <div className='home-img'>
+                    <img src={imagesvg} alt="image"  />
+                </div>
+                <div className='home-text' style={{ width: '50%', paddingLeft: '20px' }}>
+                    <BoxReveal
+                        width="100%"
+                        boxColor="#5D8AA8"
+                        duration={0.75}
+                    >
+                        <h1 style={{ fontSize: '4rem', fontWeight: 'bold' }}>
+                            Effortless Timetable Generation for Optimal Scheduling
+                        </h1>
+                    </BoxReveal>
+                </div>
+                
             </div>
-          </div>
-        </span>
-      </h3>
-    </div> */}
-            </>
-    )
+                <About/>
+                <Footer/>
+                
+        </>
+    );
 }
 
-export default Home
+export default Home;

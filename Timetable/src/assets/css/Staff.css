@@ -1,0 +1,61 @@
+/* Staff.css */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1em;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .user-table thead tr {
+    background-color: #023d47;
+    color: #ffffff;
+    text-align: left;
+  }
+  
+  .user-table th,
+  .user-table td {
+    padding: 12px 15px;
+  }
+  
+  .user-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .user-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+  
+  .user-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+  }
+  
+  .user-table tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+  
+  .user-table .delete-btn,
+  .user-table .edit-btn {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .user-table .delete-btn {
+    background-color: #ee4a44;
+  }
+  
+  .user-table .delete-btn:hover {
+    background-color: #b00804;
+  }
+  
+  .user-table .edit-btn:hover {
+    background-color: #0056b3;
+  }
+  

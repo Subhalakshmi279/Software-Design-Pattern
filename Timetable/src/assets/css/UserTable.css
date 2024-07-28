@@ -1,0 +1,79 @@
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1em;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.user-table thead tr {
+  background-color: #023d47;
+  color: #ffffff;
+  text-align: left;
+}
+
+.user-table th,
+.user-table td {
+  padding: 12px 15px;
+}
+
+.user-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.user-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.user-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.user-table tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.user-table button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user-table button:hover {
+  background-color: #0056b3;
+}
+
+.user-table .delete-btn {
+  background-color: #ee4a44;
+}
+
+.user-table .delete-btn:hover {
+  background-color: #b00804;
+}
+/* UserTable.css */
+
+.add-button {
+  background-color: #007bff; /* Primary button color */
+  color: #fff; /* Text color */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 20px; /* Padding */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth color transition */
+}
+
+.add-button:hover {
+  background-color: #0056b3; /* Darker color on hover */
+}
+
+.add-button:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 2px rgba(38, 143, 255, 0.5); /* Focus ring */
+}

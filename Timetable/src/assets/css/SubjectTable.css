@@ -1,0 +1,70 @@
+.subject-table-wrapper {
+  width: 100%;
+}
+
+.subject-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1em;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.subject-table thead tr {
+  background-color: #023d47;
+  color: #ffffff;
+  text-align: left;
+}
+
+.subject-table th,
+.subject-table td {
+  padding: 12px 15px;
+}
+
+.subject-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.subject-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3; /* Remove or change if needed */
+}
+
+.subject-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.subject-table tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.subject-table button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.subject-table button:hover {
+  background-color: #0056b3;
+}
+
+.subject-delete-btn {
+  color: #e10d05;
+}
+
+.subject-edit-btn {
+  color: #0056b3;
+}
+
+.subject-actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.subject-fit {
+  white-space: nowrap;
+}
