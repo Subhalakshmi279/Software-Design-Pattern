@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import loginimg from '@/assets/images/login.svg';
+import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for toast notifications
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -18,12 +21,41 @@ const Login = () => {
     setForm({ ...form, [e.target.id]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.email.includes('admin')) {
-      navigate('/dashboard');
-    } else {
-      navigate('/dashboard');
+
+    try {
+      const response = await axios.post('http://localhost:8080/api/login/authenticate', {
+        email: form.email,
+        password: form.password
+      });
+
+      console.log('Response data:', response.data);
+
+      if (response.data) {
+        // Check if the email contains 'admin' to determine the role
+        if (response.data.email.includes('admin')) {
+          toast.success('Welcome Admin', {
+            position: "bottom-right",
+            autoClose: 3000
+          });
+          // Add a delay before navigating
+          setTimeout(() => navigate('/admin/dashboard'), 3000);
+        } else {
+          toast.success('Welcome Staff', {
+            position: "bottom-right",
+            autoClose: 3000
+          });
+          // Add a delay before navigating
+          setTimeout(() => navigate('/dashboard'), 3000);
+        }
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+      toast.error('Login failed. Please check your credentials.', {
+        position: "bottom-right",
+        autoClose: 3000
+      });
     }
   };
 
@@ -35,7 +67,7 @@ const Login = () => {
         </div>
         <div className="w-1/2 h-full p-8 bg-gray-100 flex flex-col justify-center">
           <CardHeader className="space-y-1 text-center">
-            <CardTitle className="text-2xl text-gray-800">Student Login</CardTitle>
+            <CardTitle className="text-2xl text-gray-800">User Login</CardTitle>
             <CardDescription className="text-gray-600">
               Hey, enter your details to sign in to your account
             </CardDescription>
@@ -85,6 +117,7 @@ const Login = () => {
           </CardContent>
         </div>
       </Card>
+      <ToastContainer /> {/* Render the ToastContainer */}
     </div>
   );
 };

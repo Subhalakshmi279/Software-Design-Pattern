@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import signupimg from '@/assets/images/signup.svg';
+import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for toast notifications
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -20,12 +23,39 @@ const Register = () => {
     setForm({ ...form, [e.target.id]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.email.includes('admin')) {
-      navigate('/admin/dashboard');
-    } else {
-      navigate('/dashboard');
+    try {
+      console.log('Form data being submitted:', form);
+
+      const response = await axios.post('http://localhost:8080/api/users/register', form);
+      console.log('Registration response:', response);
+
+      // Display success toast with the registered user's name
+      toast.success(`Account created successfully, ${form.name}!`, {
+        autoClose: 3000, // 3-second delay
+        position: "bottom-right", // Position the toast in the bottom-right corner
+      });
+
+      // Navigate to the user dashboard after a short delay
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 3000); // Delay to allow toast to be visible
+    } catch (error) {
+      console.error('There was an error registering the user:', error);
+      
+      // Display error toast
+      if (error.response && error.response.data) {
+        toast.error(`Registration failed: ${error.response.data}`, {
+          autoClose: 3000, // 3-second delay
+          position: "bottom-right", // Position the toast in the bottom-right corner
+        });
+      } else {
+        toast.error('An unexpected error occurred.', {
+          autoClose: 3000, // 3-second delay
+          position: "bottom-right", // Position the toast in the bottom-right corner
+        });
+      }
     }
   };
 
@@ -53,7 +83,7 @@ const Register = () => {
                 />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="roll">Roll Number</Label>
+                <Label htmlFor="roll">ID</Label>
                 <Input
                   id="roll"
                   type="text"
@@ -94,9 +124,10 @@ const Register = () => {
           </CardContent>
         </div>
         <div className="w-1/2 h-500px flex items-center">
-          <img src={signupimg} alt="Login Illustration" className="h-3/4 w-full object-cover" />
+          <img src={signupimg} alt="Signup Illustration" className="h-3/4 w-full object-cover" />
         </div>
       </Card>
+      <ToastContainer position="bottom-right" /> {/* Render the ToastContainer with bottom-right position */}
     </div>
   );
 };

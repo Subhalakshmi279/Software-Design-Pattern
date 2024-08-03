@@ -1,55 +1,41 @@
-import React, { useState } from 'react';
-import UserTable from '@/components/Shared/UserTable';
-import UserModal from '@/components/Shared/UserModal';
-import '@/assets/css/UserDashboard.css'; // Import the CSS for UserDashboard
+import React from 'react';
+import '@/assets/css/UserDashboard.css';
+
+const scheduleData = [
+  { day: 'Monday', periods: ['CSE-A, Java', 'IT-B, C++', 'EEE-C, Python', 'ECE-A, Java', 'CIVIL-B, C++', 'MECH-C, Python'] },
+  { day: 'Tuesday', periods: ['CSE-B, C++', 'IT-C, Python', 'EEE-A, Java', 'ECE-B, C++', 'CIVIL-C, Python', 'MECH-A, Java'] },
+  { day: 'Wednesday', periods: ['CSE-C, Python', 'IT-A, Java', 'EEE-B, C++', 'ECE-C, Python', 'CIVIL-A, Java', 'MECH-B, C++'] },
+  { day: 'Thursday', periods: ['CSE-A, Java', 'IT-B, C++', 'EEE-C, Python', 'ECE-A, Java', 'CIVIL-B, C++', 'MECH-C, Python'] },
+  { day: 'Friday',   periods: ['CSE-B, C++', 'IT-C, Python', 'EEE-A, Java', 'ECE-B, C++', 'CIVIL-C, Python', 'MECH-A, Java'] },
+  { day: 'Saturday', periods: ['CSE-C, Python', 'IT-A, Java', 'EEE-B, C++', 'ECE-C, Python', 'CIVIL-A, Java', 'MECH-B, C++'] },
+];
 
 const UserDashboard = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [rows, setRows] = useState([
-    { period: "1", staffName: "John Doe", department: "CSE", assignedSubject: "Mathematics" },
-    { period: "2", staffName: "Jane Smith", department: "ECE", assignedSubject: "Physics" },
-    { period: "3", staffName: "Emily Davis", department: "IT", assignedSubject: "Chemistry" },
-  ]);
-  const [rowToEdit, setRowToEdit] = useState(null);
-
-  const handleDeleteRow = (targetIndex) => {
-    setRows(rows.filter((_, idx) => idx !== targetIndex));
-  };
-
-  const handleEditRow = (idx) => {
-    setRowToEdit(idx);
-    setModalOpen(true);
-  };
-
-  const handleSubmit = (newRow) => {
-    rowToEdit === null
-      ? setRows([...rows, newRow])
-      : setRows(
-          rows.map((currRow, idx) => {
-            if (idx !== rowToEdit) return currRow;
-            return newRow;
-          })
-        );
-  };
-
   return (
-    <div className="user-dashboard-container">
-      <div className="user-dashboard-table-container">
-        <UserTable rows={rows} deleteRow={handleDeleteRow} editRow={handleEditRow} />
-        <button onClick={() => setModalOpen(true)} className="user-dashboard-add-btn">
-          Add Entry
-        </button>
-      </div>
-      {modalOpen && (
-        <UserModal
-          closeModal={() => {
-            setModalOpen(false);
-            setRowToEdit(null);
-          }}
-          onSubmit={handleSubmit}
-          defaultValue={rowToEdit !== null && rows[rowToEdit]}
-        />
-      )}
+    <div className="schedule-table-container">
+      <table className="schedule-table">
+        <thead>
+          <tr>
+            <th>Period/Day</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+          </tr>
+        </thead>
+        <tbody>
+          {scheduleData.map((entry) => (
+            <tr key={entry.day}>
+              <td>{entry.day}</td>
+              {entry.periods.map((period, index) => (
+                <td key={index}>{period}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

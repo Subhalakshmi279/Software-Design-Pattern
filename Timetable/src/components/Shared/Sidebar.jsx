@@ -12,7 +12,7 @@ const Sidebar = () => {
   const SidebarLinks = [
     {
       title: "Timetable",
-      path: "/admin/dashboard/timetable",
+      path: "/admin/timetable",
       icon: <HiHome className="text-2xl" />,
     },
     {
@@ -21,11 +21,11 @@ const Sidebar = () => {
       subLinks: [
         {
           title: "Subject",
-          path: "/admin/dashboard/timetable/SubDetails",
+          path: "/admin/subject",
         },
         {
           title: "Staff",
-          path: "/admin/dashboard/timetable/StaffDetails",
+          path: "/admin/staff",
         },
       ],
     },

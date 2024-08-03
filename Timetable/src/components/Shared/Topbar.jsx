@@ -1,7 +1,7 @@
 import React from 'react';
 import { HiLogout, HiUser } from 'react-icons/hi'; // Importing icons
 import { Link } from 'react-router-dom'; // Importing Link for navigation
-import { ModeToggle } from '../mode-toggle';
+
 
 const Topbar = () => {
     return (
@@ -13,7 +13,7 @@ const Topbar = () => {
                 <Link to="/dashboard" className='flex items-center '>
                     <HiUser className='text-xl' /> User
                 </Link>
-                <ModeToggle />
+                {/* <ModeToggle /> */}
                 <button className='flex items-center '>
                     <Link to='/'><HiLogout className='text-xl' /></Link>   
                 </button>
