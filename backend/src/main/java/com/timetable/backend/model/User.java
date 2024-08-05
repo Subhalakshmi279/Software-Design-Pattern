@@ -1,27 +1,28 @@
 package com.timetable.backend.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "user")
 public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String roll; // Roll as the primary key
 
     private String name;
-    private String roll;
     private String email;
     private String password;
 
-    public Long getId() {
-        return id;
+    // Getters and setters
+
+    public String getRoll() {
+        return roll;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRoll(String roll) {
+        this.roll = roll;
     }
 
     public String getName() {
@@ -30,14 +31,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getRoll() {
-        return roll;
-    }
-
-    public void setRoll(String roll) {
-        this.roll = roll;
     }
 
     public String getEmail() {

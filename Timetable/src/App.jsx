@@ -12,7 +12,7 @@ import Timetable from './pages/Admin/Timetable';
 import UserDashboard from './pages/User/UserDashboard'
 import SubjectTab from './pages/Admin/SubjectTab'
 import StaffTab from './pages/Admin/StaffTab';
-
+import Help from '@/pages/User/Help';
 
 
 const App = () => {
@@ -29,6 +29,7 @@ const App = () => {
 
                     <Route element={<UserLayout />}>
                         <Route path='/dashboard' element={<UserDashboard />} />
+                        <Route path='/contact' element={<Help />} />
                     </Route>
                     
                     <Route element={<AdminLayout />}>

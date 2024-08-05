@@ -1,40 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import '@/assets/css/SubjectTab.css';
 
 const SubjectTab = () => {
-  const [subjects, setSubjects] = useState([
-    { id: 1, courseCode: 'CS101', name: 'Introduction to Programming', credits: 3 },
-    { id: 2, courseCode: 'CS102', name: 'Data Structures', credits: 2 },
-    { id: 3, courseCode: 'CS103', name: 'RDBMS', credits: 3 },
-    { id: 4, courseCode: 'CS104', name: 'DAA', credits: 2 },
-    { id: 5, courseCode: 'CS105', name: 'Python', credits: 3 },
-  ]);
-
-  const [currentSubject, setCurrentSubject] = useState({ id: null, courseCode: '', name: '', credits: 0 });
+  const [subjects, setSubjects] = useState([]);
+  const [currentSubject, setCurrentSubject] = useState({ courseCode: '', name: '', credits: 0, staffId: '' });
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/subjects')
+      .then(response => setSubjects(response.data))
+      .catch(error => console.error('Error fetching subjects:', error));
+  }, []);
 
   const handleEdit = (subject) => {
     setCurrentSubject(subject);
     setIsEditing(true);
   };
 
-  const handleDelete = (id) => {
-    setSubjects(subjects.filter(subject => subject.id !== id));
+  const handleDelete = (courseCode) => {
+    axios.delete(`http://localhost:8080/subjects/${courseCode}`)
+      .then(() => setSubjects(subjects.filter(subject => subject.courseCode !== courseCode)))
+      .catch(error => console.error('Error deleting subject:', error));
   };
 
   const handleAdd = () => {
-    setCurrentSubject({ id: null, courseCode: '', name: '', credits: 0 });
+    setCurrentSubject({ courseCode: '', name: '', credits: 0, staffId: '' });
     setIsEditing(true);
   };
 
   const handleSave = () => {
-    if (currentSubject.id) {
-      setSubjects(subjects.map(subject => (subject.id === currentSubject.id ? currentSubject : subject)));
+    const { courseCode, staffId } = currentSubject;
+    if (courseCode) {
+      // Update existing subject
+      axios.put(`http://localhost:8080/subjects/${courseCode}`, { ...currentSubject, staffId })
+        .then(response => {
+          setSubjects(subjects.map(subject => (subject.courseCode === courseCode ? response.data : subject)));
+          setIsEditing(false);
+        })
+        .catch(error => console.error('Error updating subject:', error));
     } else {
-      setSubjects([...subjects, { ...currentSubject, id: subjects.length + 1 }]);
+      // Add new subject
+      axios.post(`http://localhost:8080/subjects`, { ...currentSubject, staffId })
+        .then(response => {
+          setSubjects([...subjects, response.data]);
+          setIsEditing(false);
+        })
+        .catch(error => console.error('Error adding subject:', error));
     }
-    setIsEditing(false);
   };
 
   return (
@@ -42,25 +56,27 @@ const SubjectTab = () => {
       <table className="subject-table">
         <thead>
           <tr>
-            <th colSpan="4" className="subject-table-title">Subject Table</th>
+            <th colSpan="5" className="subject-table-title">Subject Table</th>
           </tr>
           <tr>
             <th>Course Code</th>
             <th>Subject</th>
             <th>Credits</th>
+            <th>Staff ID</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {subjects.map(subject => (
-            <tr key={subject.id}>
+            <tr key={subject.courseCode}>
               <td>{subject.courseCode}</td>
               <td>{subject.name}</td>
               <td>{subject.credits}</td>
+              <td>{subject.staffId || 'N/A'}</td>
               <td className="actions">
                 <div className="action-buttons">
                   <FaEdit className="action-icon" onClick={() => handleEdit(subject)} />
-                  <FaTrash className="action-icon" onClick={() => handleDelete(subject.id)} />
+                  <FaTrash className="action-icon" onClick={() => handleDelete(subject.courseCode)} />
                 </div>
               </td>
             </tr>
@@ -68,7 +84,7 @@ const SubjectTab = () => {
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan="4" className="add-button-container">
+            <td colSpan="5" className="add-button-container">
               <button className="add-button" onClick={handleAdd}>Add New Subject</button>
             </td>
           </tr>
@@ -78,12 +94,12 @@ const SubjectTab = () => {
       {isEditing && (
         <div className="modal">
           <div className="modal-content">
-            <h2>{currentSubject.id ? 'Edit Subject' : 'Add Subject'}</h2>
+            <h2>{currentSubject.courseCode ? 'Edit Subject' : 'Add Subject'}</h2>
             <label>
               Course Code:
               <input
                 type="text"
-                value={currentSubject.courseCode}
+                value={currentSubject.courseCode || ''}
                 onChange={(e) => setCurrentSubject({ ...currentSubject, courseCode: e.target.value })}
               />
             </label>
@@ -91,7 +107,7 @@ const SubjectTab = () => {
               Name:
               <input
                 type="text"
-                value={currentSubject.name}
+                value={currentSubject.name || ''}
                 onChange={(e) => setCurrentSubject({ ...currentSubject, name: e.target.value })}
               />
             </label>
@@ -99,14 +115,20 @@ const SubjectTab = () => {
               Credits:
               <input
                 type="number"
-                value={currentSubject.credits}
-                onChange={(e) => setCurrentSubject({ ...currentSubject, credits: parseInt(e.target.value) })}
+                value={currentSubject.credits || ''}
+                onChange={(e) => setCurrentSubject({ ...currentSubject, credits: parseInt(e.target.value, 10) })}
               />
             </label>
-            <div className="modal-actions">
-              <button onClick={handleSave}>Save</button>
-              <button onClick={() => setIsEditing(false)}>Cancel</button>
-            </div>
+            <label>
+              Staff ID:
+              <input
+                type="text"
+                value={currentSubject.staffId || ''}
+                onChange={(e) => setCurrentSubject({ ...currentSubject, staffId: e.target.value })}
+              />
+            </label>
+            <button onClick={handleSave}>Save</button>
+            <button onClick={() => setIsEditing(false)}>Cancel</button>
           </div>
         </div>
       )}

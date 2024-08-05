@@ -1,13 +1,12 @@
 package com.timetable.backend.service;
 
-import com.timetable.backend.model.User;
-import com.timetable.backend.model.Login;
-import com.timetable.backend.repo.UserRepository;
-import com.timetable.backend.repo.LoginRepository;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import com.timetable.backend.model.User;
+import com.timetable.backend.repo.UserRepository;
 
 @Service
 public class UserService {
@@ -15,16 +14,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
-    @Autowired
-    private LoginRepository loginRepo;
-
     public User registerUser(User user) {
-        // Check if user is trying to register as admin
-        Optional<Login> adminUser = loginRepo.findByEmail("admin@gmail.com");
-        if (user.getEmail().equals("admin@gmail.com") && adminUser.isPresent()) {
-            throw new RuntimeException("Admin user cannot be registered.");
-        }
-        
         // Check if user already exists
         Optional<User> existingUser = userRepo.findByEmail(user.getEmail());
         if (existingUser.isPresent()) {
@@ -37,18 +27,17 @@ public class UserService {
         return userRepo.findByEmail(email);
     }
 
-    public Optional<User> findById(Long id) {
-        return userRepo.findById(id);
+    public Optional<User> findByRoll(String roll) {
+        return userRepo.findById(roll);
     }
 
-    public void deleteUser(Long id) {
-        userRepo.deleteById(id);
+    public void deleteUser(String roll) {
+        userRepo.deleteById(roll);
     }
 
-    public User updateUser(Long id, User userDetails) {
-        User user = userRepo.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+    public User updateUser(String roll, User userDetails) {
+        User user = userRepo.findById(roll).orElseThrow(() -> new RuntimeException("User not found"));
         user.setName(userDetails.getName());
-        user.setRoll(userDetails.getRoll());
         user.setEmail(userDetails.getEmail());
         user.setPassword(userDetails.getPassword());
         return userRepo.save(user);

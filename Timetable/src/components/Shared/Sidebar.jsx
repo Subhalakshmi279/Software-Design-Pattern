@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { HiHome, HiUser, HiCog } from 'react-icons/hi';
 import { NavLink } from 'react-router-dom';
 
+
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -31,7 +32,7 @@ const Sidebar = () => {
     },
     {
       title: "Contact",
-      path: "/admin/users",
+      path: "/contact",
       icon: <HiUser className="text-2xl" />,
     },
   ];
