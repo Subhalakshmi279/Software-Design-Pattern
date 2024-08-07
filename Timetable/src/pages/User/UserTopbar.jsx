@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'; // Importing Link for navigation
 
 
 
-const Topbar = () => {
+const UserTopbar = () => {
     return (
         <div className='h-[6vh] w-full flex justify-between items-center px-4' style={{ boxShadow: '0 1px 2px 0 rgba(50, 44, 34, 0.7)' }}>
             <div className='flex items-center gap-4'>
@@ -23,4 +23,4 @@ const Topbar = () => {
     );
 }
 
-export default Topbar;
+export default UserTopbar;

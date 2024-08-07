@@ -1,5 +1,5 @@
 import React from 'react';
-import imagesvg from '@/assets/images/home-2.svg';
+import imagesvg from '@/assets/images/tt-transformed.jpeg';
 // import '@/assets/css/Home.css';
 import BoxReveal from '@/components/magicui/box-reveal';
 import About from '@/pages/Shared/About';
@@ -9,9 +9,6 @@ const Home = () => {
     return (
         <>
             <div className='home-container' style={{ display: 'flex', alignItems: 'center' }}>
-                <div className='home-img'>
-                    <img src={imagesvg} alt="image"  />
-                </div>
                 <div className='home-text' style={{ width: '50%', paddingLeft: '20px' }}>
                     <BoxReveal
                         width="100%"
@@ -22,6 +19,9 @@ const Home = () => {
                             Effortless Timetable Generation for Optimal Scheduling
                         </h1>
                     </BoxReveal>
+                </div>
+                <div className='home-img'>
+                    <img src={imagesvg} alt="image"  />
                 </div>
                 
             </div>

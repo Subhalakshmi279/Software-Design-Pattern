@@ -1,7 +1,7 @@
 .admin-layout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .admin-dashboard-body {
@@ -14,7 +14,8 @@
   display: flex;
   justify-content: center; /* Center content horizontally */
   align-items: center; /* Center content vertically */
-  overflow-y: hidden;
+  /* overflow-y: auto; */
+  /* overflow-y: hidden; */
   }
 
 .admin-content-wrapper {

@@ -41,7 +41,7 @@ const Timetable = () => {
   };
 
   return (
-    <div className="container">
+    <div className="t-container">
       <div className="timetable">
         <h1 className="title">Timetable</h1>
         <table>

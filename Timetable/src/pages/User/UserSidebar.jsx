@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { HiHome, HiUser, HiCog, HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 import { NavLink } from 'react-router-dom';
-import '@/assets/css/Sidebar.css'
+import '@/assets/css/UserSidebar.css'
 
-const Sidebar = () => {
+const UserSidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -76,4 +76,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default UserSidebar;
