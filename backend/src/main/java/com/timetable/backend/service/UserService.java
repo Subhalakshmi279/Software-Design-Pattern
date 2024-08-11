@@ -1,49 +1,53 @@
 package com.timetable.backend.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.timetable.backend.model.User;
 import com.timetable.backend.repo.UserRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserService {
-
     @Autowired
-    private UserRepository userRepo;
+    private UserRepository urepo;
 
-    public User registerUser(User user) {
-        // Check if user already exists
-        Optional<User> existingUser = userRepo.findByEmail(user.getEmail());
-        if (existingUser.isPresent()) {
-            throw new RuntimeException("User already exists with this email.");
+    public List<User> getUsers() {
+        return urepo.findAll();
+    }
+
+    public User addUsers(User user) {
+        return urepo.save(user);
+    }
+
+    public String deleteUser(Long uid) {
+        urepo.deleteById(uid);
+        return "User deleted successfully";
+    }
+
+    public User findUserByUid(Long uid) {
+        Optional<User> user = urepo.findById(uid);
+        return user.orElse(null);
+    }
+
+    public User editUserByUid(Long uid, User userDetails) {
+        User user = urepo.findById(uid).orElse(null);
+        if (user != null) {
+            user.setName(userDetails.getName());
+            user.setEmail(userDetails.getEmail());
+            user.setPassword(userDetails.getPassword());
+            user.setSubjects(userDetails.getSubjects());
+            urepo.save(user);
         }
-        return userRepo.save(user);
+        return user;
     }
 
-    public Optional<User> findByEmail(String email) {
-        return userRepo.findByEmail(email);
-    }
-
-    public Optional<User> findByRoll(String roll) {
-        return userRepo.findById(roll);
-    }
-
-    public void deleteUser(String roll) {
-        userRepo.deleteById(roll);
-    }
-
-    public User updateUser(String roll, User userDetails) {
-        User user = userRepo.findById(roll).orElseThrow(() -> new RuntimeException("User not found"));
-        user.setName(userDetails.getName());
-        user.setEmail(userDetails.getEmail());
-        user.setPassword(userDetails.getPassword());
-        return userRepo.save(user);
-    }
-
-    public Iterable<User> findAllUsers() {
-        return userRepo.findAll();
+    public Optional<User> getUserByEmail(String email) {
+        // TODO Auto-generated method stub
+        // throw new UnsupportedOperationException("Unimplemented method
+        // 'getUserByEmail'");
+        return urepo.findByEmail(email);
     }
 }

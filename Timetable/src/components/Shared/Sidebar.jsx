@@ -12,6 +12,11 @@ const Sidebar = () => {
 
   const SidebarLinks = [
     {
+      title: "Dashboard",
+      path: "/admin/dashboard",
+      icon: <HiUser className="text-2xl" />,
+    },
+    {
       title: "Timetable",
       path: "/admin/timetable",
       icon: <HiHome className="text-2xl" />,
@@ -29,11 +34,6 @@ const Sidebar = () => {
           path: "/admin/staff",
         },
       ],
-    },
-    {
-      title: "Contact",
-      path: "/contact",
-      icon: <HiUser className="text-2xl" />,
     },
   ];
 

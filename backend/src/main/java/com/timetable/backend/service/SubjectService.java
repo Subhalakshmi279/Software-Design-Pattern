@@ -1,59 +1,44 @@
 package com.timetable.backend.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.timetable.backend.model.Subject;
-import com.timetable.backend.model.User;
 import com.timetable.backend.repo.SubjectRepo;
-import com.timetable.backend.repo.UserRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubjectService {
-
     @Autowired
-    private SubjectRepo subjectRepo;
+    private SubjectRepo srepo;
 
-    @Autowired
-    private UserRepository userRepo;
-
-    public List<Subject> getAllSubjects() {
-        return subjectRepo.findAll();
+    public List<Subject> getSubs() {
+        return srepo.findAll();
     }
 
-    public Optional<Subject> getSubjectByCourseCode(String courseCode) {
-        return subjectRepo.findByCourseCode(courseCode);
+    public Subject addSubs(Subject sub) {
+        return srepo.save(sub);
     }
 
-    public Subject createSubject(Subject subject, String roll) {
-        User user = userRepo.findById(roll)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        subject.setUser(user);
-        return subjectRepo.save(subject);
+    public String deleteSub(Long sid) {
+        srepo.deleteById(sid);
+        return "Subject deleted successfully";
     }
 
-    public Subject updateSubject(String courseCode, Subject updatedSubject) {
-        return subjectRepo.findByCourseCode(courseCode)
-                .map(existingSubject -> {
-                    existingSubject.setName(updatedSubject.getName());
-                    existingSubject.setCredits(updatedSubject.getCredits());
-                    // Optionally update user only if needed
-                    // existingSubject.setUser(updatedSubject.getUser());
-                    return subjectRepo.save(existingSubject);
-                })
-                .orElseThrow(() -> new RuntimeException("Subject not found"));
+    public Optional<Subject> getSubBySid(Long sid) {
+        return srepo.findById(sid);
     }
 
-    public void deleteSubject(String courseCode) {
-        subjectRepo.findByCourseCode(courseCode)
-                .ifPresentOrElse(
-                    subjectRepo::delete,
-                    () -> {
-                        throw new RuntimeException("Subject not found");
-                    }
-                );
+    public Subject updateSub(Long sid, Subject subDetails) {
+        Subject sub = srepo.findById(sid).orElse(null);
+        if (sub != null) {
+            sub.setTitle(subDetails.getTitle());
+            sub.setCredit(subDetails.getCredit());
+            sub.setUser(subDetails.getUser());
+            srepo.save(sub);
+        }
+        return sub;
     }
 }

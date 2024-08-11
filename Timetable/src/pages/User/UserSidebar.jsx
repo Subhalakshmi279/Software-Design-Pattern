@@ -12,23 +12,20 @@ const UserSidebar = () => {
 
   const SidebarLinks = [
     {
-      title: "Timetable",
-      path: "/admin/timetable",
+      title: "Class",
+      path: "/staff/class",
       icon: <HiHome className="text-2xl" />,
     },
     {
-      title: "Details",
+  
+      title: "Subject",
+      path: "/staff/subject",
       icon: <HiCog className="text-2xl" />,
-      subLinks: [
-        {
-          title: "Subject",
-          path: "/admin/subject",
-        },
-        {
-          title: "Staff",
-          path: "/admin/staff",
-        },
-      ],
+       
+        // {
+        //   title: "Staff",
+        //   path: "/admin/staff",
+        // },
     },
     {
       title: "Contact",

@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
-import { FaEdit, FaTrash } from 'react-icons/fa';
-import '@/assets/css/Timetable.css';
+import React, { useState } from "react";
+import { FaEdit, FaTrash, FaCalendarAlt, FaFileExport } from "react-icons/fa";
+import "@/assets/css/Timetable.css";
 
 const initialData = [
-  { id: 1, period: 1, subject: 'Data Structures', staff: 'Prof. John Doe' },
-  { id: 2, period: 2, subject: 'Algorithms', staff: 'Prof. Jane Smith' },
-  { id: 3, period: 3, subject: 'Computer Networks', staff: 'Prof. Alice Johnson' },
-  { id: 4, period: 4, subject: 'Operating Systems', staff: 'Prof. Bob Brown' },
-  { id: 5, period: 5, subject: 'Database Systems', staff: 'Prof. Carol White' },
-  { id: 6, period: 6, subject: 'Software Engineering', staff: 'Prof. David Green' }
+  { id: 1, department: "CSE", class: "A", tutor: "Dr. Smith", timetable: "View" },
+  { id: 2, department: "IT", class: "B", tutor: "Ms. Johnson", timetable: "View" },
+  { id: 3, department: "EEE", class: "C", tutor: "Mr. Brown", timetable: "View" },
+  { id: 4, department: "IOT", class: "A", tutor: "Dr. Green", timetable: "View" },
 ];
 
 const Timetable = () => {
@@ -17,7 +15,7 @@ const Timetable = () => {
   const [editData, setEditData] = useState(null);
 
   const handleAdd = () => {
-    setEditData({ period: '', subject: '', staff: '' });
+    setEditData({ department: "", class: "", tutor: "", timetable: "View" });
     setShowPopup(true);
   };
 
@@ -27,80 +25,131 @@ const Timetable = () => {
   };
 
   const handleDelete = (id) => {
-    setTimetableData(timetableData.filter(item => item.id !== id));
+    setTimetableData(timetableData.filter((item) => item.id !== id));
   };
 
   const handleSubmit = () => {
     if (editData.id) {
-      setTimetableData(timetableData.map(item => item.id === editData.id ? editData : item));
+      setTimetableData(
+        timetableData.map((item) => (item.id === editData.id ? editData : item))
+      );
     } else {
-      setTimetableData([...timetableData, { ...editData, id: timetableData.length + 1 }]);
+      setTimetableData([
+        ...timetableData,
+        { ...editData, id: timetableData.length + 1 },
+      ]);
     }
     setShowPopup(false);
     setEditData(null);
   };
 
+  const handleExport = () => {
+    // Implement export functionality here
+    console.log("Exporting data...");
+  };
+
   return (
     <div className="t-container">
       <div className="timetable">
-        <h1 className="title">Timetable</h1>
-        <table>
+        <div className="flex justify-between items-center mb-4">
+          <div className="text-center">
+            <h1 className="title text-2xl font-bold text-white">Class Table</h1>
+          </div>
+          <button
+            onClick={handleExport}
+            className="flex items-center text-blue-500 hover:text-blue-300"
+          >
+            <FaFileExport className="mr-1" />
+            Export
+          </button>
+        </div>
+        <table className="w-full border-collapse text-gray-100">
           <thead>
-            <tr>
-              <th>Period</th>
-              <th>Subject</th>
-              <th>Staff</th>
-              <th>Actions</th>
+            <tr className="border-b border-gray-600">
+              <th className="py-2">Department</th>
+              <th className="py-2">Class</th>
+              <th className="py-2">Tutor</th>
+              <th className="py-2">Timetable</th>
+              <th className="py-2">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {timetableData.map(item => (
-              <tr key={item.id}>
-                <td>{item.period}</td>
-                <td>{item.subject}</td>
-                <td>{item.staff}</td>
+            {timetableData.map((item) => (
+              <tr key={item.id} className="border-b border-gray-600">
+                <td className="py-3">{item.department}</td>
+                <td className="py-3">{item.class}</td>
+                <td className="py-3">{item.tutor}</td>
+                <td className="py-3">
+                  <div className="flex items-center justify-center">
+                    <button className="flex items-center text-blue-500 hover:text-blue-300">
+                      <FaCalendarAlt className="mr-1" />
+                      {item.timetable}
+                    </button>
+                  </div>
+                </td>
                 <td className="actions">
-                  <FaEdit onClick={() => handleEdit(item)} className="icon edit" />
-                  <FaTrash onClick={() => handleDelete(item.id)} className="icon delete" />
+                  <FaEdit
+                    onClick={() => handleEdit(item)}
+                    className="icon edit mr-2 cursor-pointer"
+                  />
+                  <FaTrash
+                    onClick={() => handleDelete(item.id)}
+                    className="icon delete cursor-pointer"
+                  />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <button onClick={handleAdd} className="add-button">Add</button>
+        <button onClick={handleAdd} className="add-button mt-4">
+          Add
+        </button>
       </div>
 
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup">
-            <h3>{editData.id ? 'Edit' : 'Add'} Timetable Entry</h3>
+            <h3>{editData.id ? "Edit" : "Add"} Class Entry</h3>
             <div>
-              <label>Period</label>
+              <label>Department</label>
               <input
                 type="text"
-                value={editData.period}
-                onChange={(e) => setEditData({ ...editData, period: e.target.value })}
+                value={editData.department}
+                onChange={(e) =>
+                  setEditData({ ...editData, department: e.target.value })
+                }
               />
             </div>
             <div>
-              <label>Subject</label>
+              <label>Class</label>
               <input
                 type="text"
-                value={editData.subject}
-                onChange={(e) => setEditData({ ...editData, subject: e.target.value })}
+                value={editData.class}
+                onChange={(e) =>
+                  setEditData({ ...editData, class: e.target.value })
+                }
               />
             </div>
             <div>
-              <label>Staff</label>
+              <label>Tutor</label>
               <input
                 type="text"
-                value={editData.staff}
-                onChange={(e) => setEditData({ ...editData, staff: e.target.value })}
+                value={editData.tutor}
+                onChange={(e) =>
+                  setEditData({ ...editData, tutor: e.target.value })
+                }
               />
             </div>
             <div className="popup-buttons">
-              <button onClick={handleSubmit} className="submit-button">Submit</button>
-              <button onClick={() => setShowPopup(false)} className="cancel-button">Cancel</button>
+              <button onClick={handleSubmit} className="submit-button">
+                Submit
+              </button>
+              <button
+                onClick={() => setShowPopup(false)}
+                className="cancel-button"
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>

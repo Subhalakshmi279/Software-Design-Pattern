@@ -56,7 +56,7 @@ const Counter = () => {
               <h3>
                 <span className="count" data-target="50">0</span>+
               </h3>
-              <h4>SUBJECTS</h4>
+              <h4>COURSES</h4>
             </div>
           </div>
         </div>

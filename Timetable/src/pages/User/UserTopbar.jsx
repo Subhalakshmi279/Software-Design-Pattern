@@ -16,7 +16,7 @@ const UserTopbar = () => {
                 </Link>
                 {/* <ModeToggle /> */}
                 <button className='flex items-center '>
-                    <Link to='/'><HiLogout className='text-xl' /></Link>   
+                    <Link to='/login'><HiLogout className='text-xl' /></Link>   
                 </button>
             </div>
         </div>

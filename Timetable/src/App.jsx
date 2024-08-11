@@ -13,6 +13,9 @@ import UserDashboard from './pages/User/UserDashboard'
 import SubjectTab from './pages/Admin/SubjectTab'
 import StaffTab from './pages/Admin/StaffTab';
 import Help from '@/pages/User/Help';
+import UserSub from './pages/User/UserSub';
+import Class from './pages/User/Class'
+import UserSettings from './pages/Shared/UserSettings'
 
 
 const App = () => {
@@ -30,6 +33,9 @@ const App = () => {
                     <Route element={<UserLayout />}>
                         <Route path='/dashboard' element={<UserDashboard />} />
                         <Route path='/contact' element={<Help />} />
+                        <Route path='/staff/subject' element={<UserSub/>}/>
+                        <Route path='/staff/class' element={<Class/>}/>
+                        <Route path='/user' element={<UserSettings/>}/>
                     </Route>
                     
                     <Route element={<AdminLayout />}>

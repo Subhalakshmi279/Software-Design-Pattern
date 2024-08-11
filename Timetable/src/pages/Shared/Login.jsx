@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import loginimg from '@/assets/images/login.svg';
-import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for toast notifications
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
-  const [form, setForm] = useState({
+  const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
@@ -18,37 +18,26 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.id]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await axios.post('http://localhost:8080/api/login/authenticate', {
-        email: form.email,
-        password: form.password
-      });
-
-      console.log('Response data:', response.data);
+      // Simulate a login process
+      const response = await axios.post('http://localhost:8080/api/v1/auth/authenticate', formData);
 
       if (response.data) {
-        // Check if the email contains 'admin' to determine the role
-        if (response.data.email.includes('admin')) {
-          toast.success('Welcome Admin', {
-            position: "bottom-right",
-            autoClose: 3000
-          });
-          // Add a delay before navigating
-          setTimeout(() => navigate('/admin/dashboard'), 3000);
-        } else {
-          toast.success('Welcome Staff', {
-            position: "bottom-right",
-            autoClose: 3000
-          });
-          // Add a delay before navigating
-          setTimeout(() => navigate('/dashboard'), 3000);
-        }
+        // Simulate successful login
+        toast.success('Login successful! Redirecting...', {
+          position: "bottom-right",
+          autoClose: 3000
+        });
+        setTimeout(() => navigate('/dashboard'), 3000); // Redirect after a short delay
       }
     } catch (error) {
       console.error('Login failed:', error);
@@ -78,8 +67,9 @@ const Login = () => {
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
-                  value={form.email}
+                  value={formData.email}
                   onChange={handleChange}
                   placeholder="user@gmail.com"
                   className="border-none bg-white"
@@ -90,8 +80,9 @@ const Login = () => {
                 <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
+                  name="password"
                   type="password"
-                  value={form.password}
+                  value={formData.password}
                   onChange={handleChange}
                   placeholder="******"
                   className="border-none bg-white"

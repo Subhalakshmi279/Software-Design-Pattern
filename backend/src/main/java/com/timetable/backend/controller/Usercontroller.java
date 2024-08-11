@@ -1,9 +1,12 @@
+
+
 package com.timetable.backend.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,58 +20,42 @@ import com.timetable.backend.model.User;
 import com.timetable.backend.service.UserService;
 
 @RestController
-@RequestMapping("/api/users")
-@CrossOrigin(origins = "http://localhost:5173")
-public class Usercontroller {
-
+@RequestMapping("/users")
+public class UserController {
     @Autowired
-    private UserService userService;
+    private UserService uservice;
+
+    @GetMapping("/getusers")
+    public List<User> getUsers() {
+        return uservice.getUsers();
+    }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
-        try {
-            // Check if user is trying to register as admin
-            if (user.getEmail().equals("admin@gmail.com")) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Admin user cannot be registered.");
-            }
-            User registeredUser = userService.registerUser(user);
-            return ResponseEntity.ok(registeredUser);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+    public User addUsers(@RequestBody User user) {
+        return uservice.addUsers(user);
     }
 
-    @GetMapping("/get/{email}")
-    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
-        return userService.findByEmail(email)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @DeleteMapping("/delete/{uid}")
+    public String deleteUser(@PathVariable Long uid) {
+        return uservice.deleteUser(uid);
     }
 
-    @GetMapping("/{roll}")
-    public ResponseEntity<?> getUserByRoll(@PathVariable String roll) {
-        return userService.findByRoll(roll)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/find/{uid}")
+    public User findUserByUid(@PathVariable Long uid) {
+        return uservice.findUserByUid(uid);
     }
 
-    @GetMapping
-    public Iterable<User> getAllUsers() {
-        return userService.findAllUsers();
+    @PutMapping("/edit/{uid}")
+    public User editUserByUid(@PathVariable Long uid, @RequestBody User userDetails) {
+        return uservice.editUserByUid(uid, userDetails);
     }
 
-    @DeleteMapping("/{roll}")
-    public ResponseEntity<Void> deleteUser(@PathVariable String roll) {
-        userService.deleteUser(roll);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping("/{roll}")
-    public ResponseEntity<User> updateUser(@PathVariable String roll, @RequestBody User userDetails) {
-        try {
-            return ResponseEntity.ok(userService.updateUser(roll, userDetails));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    @PostMapping("/login")
+    public ResponseEntity<String> Login(@RequestBody User user) {
+        Optional<User> a = uservice.getUserByEmail(user.getEmail());
+        if (a == null || !user.getPassword().equals(user.getPassword()))
+            return ResponseEntity.badRequest().body("Invalid");
+        else
+            return ResponseEntity.ok("Success");
     }
 }
