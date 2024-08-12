@@ -1,0 +1,79 @@
+/* Overall container */
+.container-help {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full height */
+    padding: 20px;
+    background-color: #f4f4f4; /* Light grey background */
+}
+
+/* Image container */
+.img-container {
+    flex: 1; /* Equal width as the form container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Form container */
+.form-container {
+    /* margin-right: 100px; */
+    flex: 1; /* Equal width as the image container */
+    padding: 20px;
+    background-color: white; /* White background for the form */
+    box-shadow: 0 4px 8px rgba(2, 1, 0.5, 0.1); /* Subtle shadow */
+}
+
+/* Form styling */
+.request-form {
+    max-width: 500px; /* Maximum width of the form */
+    height: 550px;
+    margin: auto;
+   
+     /* Center the text in the form */
+}
+.request-form h1{
+    text-align: center;
+    font-size: x-large;
+}
+
+.form-group {
+    margin-bottom: 20px; /* Space between form fields */
+    margin-right: 40px;
+    width: 500px;
+}
+
+.form-control {
+    width: 100%; /* Full width of the form group */
+    padding: 10px;
+    border: 2px solid #ccc; /* Grey border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Styling for the submit button */
+.submit-button {
+    width: 100%; /* Full width of the form */
+    padding: 10px;
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.25s; /* Smooth transition for background color */
+}
+
+.submit-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Heading style */
+h1 {
+    color: #333; /* Dark grey color for the text */
+    margin-bottom: 20px; /* Space below the heading */
+}

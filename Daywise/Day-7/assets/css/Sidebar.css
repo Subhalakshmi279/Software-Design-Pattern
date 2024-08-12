@@ -1,0 +1,28 @@
+/* AdminDashboard.css or your relevant CSS file */
+
+/* For the sidebar link colors */
+.nav-link {
+    color: white; /* Default link color */
+  }
+  
+  .nav-link:hover {
+    background-color: #4b5563; /* Color on hover */
+  }
+  
+  .nav-link-active {
+    background-color: #374151; /* Active link color */
+  }
+  
+  /* Additional styles for the subLinks */
+  .sub-link {
+    color: white; /* Default color for sub-links */
+  }
+  
+  .sub-link:hover {
+    background-color: #4b5563; /* Color on hover for sub-links */
+  }
+  
+  .sub-link-active {
+    background-color: #374151; /* Active color for sub-links */
+  }
+  

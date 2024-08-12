@@ -1,0 +1,36 @@
+.admin-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.admin-dashboard-body {
+  display: flex;
+  flex-grow: 1;
+}
+
+.admin-main-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  /* overflow-y: auto; */
+  /* overflow-y: hidden; */
+  }
+
+.admin-content-wrapper {
+  width: 100%;
+  max-width: 1200px; /* Maximum width of the content area */
+  display: flex;
+  justify-content: center; /* Center timetable horizontally */
+  align-items: center; /* Center timetable vertically */
+}
+
+.timetable {
+  width: 80%; /* Adjust the width as needed */
+  /* padding: 20px; */
+  background-color: #333;
+  border-radius: 10px;
+  color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional box shadow for a more polished look */
+}
