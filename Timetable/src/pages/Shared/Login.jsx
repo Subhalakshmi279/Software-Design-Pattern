@@ -28,16 +28,24 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Simulate a login process
       const response = await axios.post('http://localhost:8080/api/v1/auth/authenticate', formData);
 
       if (response.data) {
-        // Simulate successful login
+        const { role } = response.data; // Assuming role is part of the response
+
         toast.success('Login successful! Redirecting...', {
           position: "bottom-right",
           autoClose: 3000
         });
-        setTimeout(() => navigate('/dashboard'), 3000); // Redirect after a short delay
+
+        setTimeout(() => {
+          // Check if email contains 'admin'
+          if (formData.email.toLowerCase().includes('admin')) {
+            navigate('/admin/dashboard');
+          } else {
+            navigate('/dashboard'); // Adjust this to the appropriate path
+          }
+        }, 3000); // Redirect after a short delay
       }
     } catch (error) {
       console.error('Login failed:', error);

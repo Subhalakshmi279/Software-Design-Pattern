@@ -1,88 +1,33 @@
 import React from 'react';
-import { FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaCodepen, FaTwitter } from 'react-icons/fa';
 
 const Footer = () => {
-    return (
-        <footer style={styles.footerContainer}>
-            <div style={styles.footerContent}>
-                <div style={styles.footerSection}>
-                    <h2 style={styles.footerHeader}>About TTGS</h2>
-                    <p style={styles.footerText}>
-                        TTGS is a leading timetable management system designed to streamline scheduling processes for educational institutions. Our platform helps colleges and universities create, manage, and optimize their timetables with ease.
-                    </p>
-                </div>
-                <div style={styles.footerSection}>
-                    <h2 style={styles.footerHeader}>Contact Us</h2>
-                    <p style={styles.footerText}>
-                        Have questions or need support? Get in touch with our team for assistance.
-                        <br />
-                        Email: support@ttgs.com
-                        <br />
-                        Phone: +1 234 567 890
-                    </p>
-                </div>
-                <div style={styles.footerSection}>
-                    <h2 style={styles.footerHeader}>Follow Us</h2>
-                    <div style={styles.socialMediaIcons}>
-                        <a href="https://instagram.com" style={styles.iconLink}>
-                            <FaInstagram size={30} />
-                        </a>
-                        <a href="https://linkedin.com" style={styles.iconLink}>
-                            <FaLinkedin size={30} />
-                        </a>
-                        <a href="https://twitter.com" style={styles.iconLink}>
-                            <FaTwitter size={30} />
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div style={styles.footerBottom}>
-                <p style={styles.footerText}>© {new Date().getFullYear()} TTGS. All rights reserved.</p>
-            </div>
-        </footer>
-    );
-};
-
-const styles = {
-    footerContainer: {
-        backgroundColor: '#2c3e50',
-        color: '#ecf0f1',
-        padding: '20px 0',
-        marginTop: '40px'
-    },
-    footerContent: {
-        display: 'flex',
-        justifyContent: 'space-around',
-        padding: '20px 0',
-    },
-    footerSection: {
-        flex: 1,
-        maxWidth: '300px',
-        margin: '0 10px',
-    },
-    footerHeader: {
-        fontSize: '1.5rem',
-        marginBottom: '10px',
-    },
-    footerText: {
-        fontSize: '1rem',
-        lineHeight: '1.6',
-    },
-    socialMediaIcons: {
-        display: 'flex',
-        justifyContent: 'space-around',
-        marginTop: '10px',
-    },
-    iconLink: {
-        color: '#ecf0f1',
-        margin: '0 10px',
-        transition: 'color 0.3s',
-    },
-    footerBottom: {
-        borderTop: '1px solid #34495e',
-        padding: '10px 0',
-        textAlign: 'center',
-    }
-};
+  return (
+    <section id="footer" className="bg-sky-100 opacity-50 text-black-200 h-10 py-0.1 px-12 w-full fixed bottom-0">
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="text-left">
+          <p className="text-lg font-semibold mb-10">Timely©2024</p>
+          <p className="text-lg font-bold "> Reech Studio 2019</p>
+        </div>
+        <div className="text-right flex items-center space-x-2 mb-16">
+          <div className="footer-social flex space-x-4">
+            <a href="#" className="text-white-200 hover:text-gray-400 transition duration-300">
+              <FaFacebookF size={20} />
+            </a>
+            <a href="#" className="text-white-200 hover:text-gray-400 transition duration-300">
+              <FaInstagram size={20} />
+            </a>
+            <a href="#" className="text-white-200 hover:text-gray-400 transition duration-300">
+              <FaCodepen size={20} />
+            </a>
+            <a href="#" className="text-white-200 hover:text-gray-400 transition duration-300">
+              <FaTwitter size={20} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default Footer;

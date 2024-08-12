@@ -1,0 +1,53 @@
+/* UserSidebar.css */
+
+/* For the sidebar link colors */
+.nav-link {
+    color: white; /* Default link color */
+  }
+  
+  .nav-link:hover {
+    background-color: #4b5563; /* Lighter shade for hover */
+  }
+  
+  .nav-link-active {
+    background-color: #4b5563; /* Lighter shade for active links */
+  }
+  
+  /* Styles for the logout button */
+  .logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 15px; /* Adjust padding */
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #7287a3;
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border: 0.2px solid #7287a3; /* Border color */
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 #4c5b6f;
+    margin: auto; /* Center the button */
+  }
+  
+  .logout:hover {
+    color: white;
+    box-shadow: inset 0 -100px 0 0 #4c5b6f;
+  }
+  
+  .logout:active {
+    transform: scale(0.9);
+  }
+  
+  /* When the sidebar is minimized */
+  .w-20 .logout {
+    padding: 8px; /* Smaller padding when minimized */
+    margin: 0; /* Align with the left edge */
+    position: fixed;
+   margin-bottom: 45px;
+    left: 5; /* Align to the left */
+   
+    text-align: center; /* Center text when aligned to the left */
+  }
+  

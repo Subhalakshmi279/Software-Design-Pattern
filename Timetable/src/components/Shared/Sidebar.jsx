@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
-import { HiHome, HiUser, HiCog, HiChevronLeft, HiChevronRight } from 'react-icons/hi';
-import { NavLink } from 'react-router-dom';
-import '@/assets/css/Sidebar.css'
+import { HiHome, HiUser, HiCog, HiChevronLeft, HiChevronRight, HiLogout } from 'react-icons/hi';
+import { NavLink, useNavigate } from 'react-router-dom';
+import '@/assets/css/Sidebar.css';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    // Perform any logout logic if needed (e.g., clearing auth tokens)
+    navigate('/'); // Navigate to the root path
   };
 
   const SidebarLinks = [
@@ -42,7 +48,7 @@ const Sidebar = () => {
       <button onClick={toggleSidebar} className="p-4">
         {isOpen ? <HiChevronLeft className="text-2xl" /> : <HiChevronRight className="text-2xl" />}
       </button>
-      <nav className="flex flex-col mt-4">
+      <nav className="flex flex-col mt-4 flex-1">
         {SidebarLinks.map((link, index) => (
           <div key={index} className="relative group">
             <NavLink
@@ -72,6 +78,12 @@ const Sidebar = () => {
           </div>
         ))}
       </nav>
+      <div className="flex justify-center items-end p-4">
+        <button className="logout" onClick={handleLogout}>
+          <HiLogout className="text-2xl" />
+          {isOpen && <span className="ml-2">Logout</span>}
+        </button>
+      </div>
     </div>
   );
 };
